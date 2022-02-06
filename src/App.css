@@ -3,7 +3,6 @@
 @font-face {
   font-family: "Noto Sans CJK KR";
   font-style: normal;
-  font-weight: 100;
   src: url("'/../assets/font/Noto_Sans_KR/NotoSansKR-Light.otf") format("woff");
 }
 
@@ -81,6 +80,12 @@ select {
   border: 1px solid #aaaaaa;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
 p,
 span,
 label,
@@ -150,7 +155,10 @@ label {
 }
 
 .safe-area-view {
-  margin-top: 70px;
+  width: 1260px;
+  margin: 70px auto;
+  display: flex;
+  justify-content: space-between;
 }
 
 .MuiMenu-paper {
@@ -176,4 +184,33 @@ label {
   outline: none;
   background: white;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+header {
+  width: 100%;
+  height: 70px;
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 0;
+  z-index: 100;
+  transition: top 0.3s ease;
+  background: #2c3333;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media all and (min-width: 780px) {
+}
+
+/* Tablet & Desktop #1 - 태블릿 PC와 데스크톱 공용 스타일 #1 */
+@media all and (min-width: 481px) {
+}
+
+/* Desktop - 데스크톱 전용 스타일 */
+@media all and (min-width: 1340px) {
+  header {
+    width: 1260px;
+  }
 }

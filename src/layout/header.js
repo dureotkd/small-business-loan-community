@@ -2,11 +2,7 @@ import { useState } from "react";
 import { connect } from "react-redux";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import {
-  StyledHeader,
-  StyledLogo,
-  StyledDiv,
-} from "../assets/layout/layoutCss";
+import { StyledLogo, StyledDiv } from "../assets/layout/layoutCss";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import { BsFillBellFill } from "react-icons/bs";
@@ -43,7 +39,7 @@ function Header({ loginUser, dispatch }) {
   const handleModalClose = () => setModalOpen(false);
 
   return (
-    <StyledHeader>
+    <header>
       <StyledLogo>{loginUser.email}</StyledLogo>
       <StyledDiv
         style={{
@@ -121,7 +117,7 @@ function Header({ loginUser, dispatch }) {
           </>
         )}
       </StyledDiv>
-    </StyledHeader>
+    </header>
   );
 }
 

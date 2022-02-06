@@ -22,8 +22,8 @@ function App() {
   });
 
   useEffect(() => {
-    // const initUser = JSON.parse(localStorage.getItem("user"));
-    // console.log("!!");
+    const initUser = JSON.parse(localStorage.getItem("user"));
+    if (initUser) setLoginUser(initUser);
   }, []);
 
   const loginUserReducer = (state = loginUser, action) => {
