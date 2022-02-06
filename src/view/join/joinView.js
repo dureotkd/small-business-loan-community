@@ -1,7 +1,7 @@
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
 import { useEffect } from "react";
+import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
 import { StyledSafeDiv } from "../../assets/default/defaultCss";
 
 export default function JoinView(props) {

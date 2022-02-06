@@ -3,11 +3,7 @@ import { useEffect } from "react";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
-import {
-  KAKAO_AUTH_URL,
-  CLIENT_ID,
-  NAVER_API_KEY,
-} from "../../libaray/oauth/oauth";
+import { KAKAO_AUTH_URL } from "../../libaray/oauth/oauth";
 import {
   StyledSafeDiv,
   StyledCenterDiv,
@@ -17,46 +13,8 @@ import {
   StyledH1,
   StyledH4,
 } from "../../assets/default/defaultCss";
-const { naver } = window;
 
 export default function AuthView(props) {
-  useEffect(() => {
-    getNaverBtn();
-    getUserProfile();
-  }, []);
-
-  const getNaverBtn = () => {
-    const naverLogin = new naver.LoginWithNaverId({
-      clientId: CLIENT_ID,
-      callbackUrl: "http://localhost:3000/auth",
-      isPopup: false,
-      loginButton: { color: "green", type: 1, height: 30 },
-      callbackHandle: true,
-    });
-    naverLogin.init();
-  };
-
-  const getUserProfile = () => {
-    window.location.href.includes("access_token") && getUser();
-    function getUser() {
-      const location = window.location.href.split("=")[1];
-      const token = location.split("&")[0];
-      console.log("token: ", token);
-      fetch(`${NAVER_API_KEY}/account/sign-in`, {
-        method: "GET",
-        headers: {
-          "Content-type": "application/json",
-          Authorization: token,
-        },
-      })
-        .then((res) => res.json())
-        .then((res) => {
-          localStorage.setItem("access_token", res.token);
-        })
-        .catch((err) => console.log("err : ", err));
-    }
-  };
-
   return (
     <StyledSafeDiv>
       <StyledCenterDiv

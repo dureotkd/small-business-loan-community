@@ -1,15 +1,35 @@
+import { useEffect } from "react";
 import { connect } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { getNaverUser } from "../../../libaray/oauth/oauth";
 import { StyledSafeDiv } from "../../../assets/default/defaultCss";
 
-function Callback() {
-  const code = new URL(window.location.href).searchParams.get("code");
+function Callback({ loginUser, dispatch }) {
+  const navigate = useNavigate();
 
-  return <StyledSafeDiv>zz</StyledSafeDiv>;
+  useEffect(() => {
+    getOauth();
+  }, []);
+
+  const getOauth = async () => {
+    const naverUser = await getNaverUser();
+
+    dispatch({
+      type: "doLogin",
+      payload: {
+        user: naverUser,
+      },
+    });
+
+    navigate("/");
+  };
+
+  return <StyledSafeDiv></StyledSafeDiv>;
 }
 
 function ChangeToProps(state) {
   return {
-    state: state.loginUser,
+    state: state.loginUserReducer,
   };
 }
 

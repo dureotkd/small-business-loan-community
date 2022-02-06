@@ -5,7 +5,7 @@ const StyledHeader = styled.header`
   height: 70px;
   position: fixed;
   top: 0;
-  z-index: 9999;
+  z-index: 100;
   transition: top 0.3s ease;
   background: #2c3333;
   display: flex;

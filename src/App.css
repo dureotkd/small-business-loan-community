@@ -10,7 +10,6 @@
 body {
   margin: 0;
   padding: 0;
-  font-size: 0.75em;
   background: #fff;
   font-family: "Noto Sans CJK KR";
 }
@@ -89,7 +88,6 @@ a {
   margin: 0;
   padding: 0;
   word-break: break-all;
-  font-family: "Noto Sans CJK KR";
 }
 pre {
   overflow-x: auto;
@@ -149,4 +147,33 @@ label {
   display: inline-block;
   max-width: 100%;
   font-weight: normal;
+}
+
+.safe-area-view {
+  margin-top: 70px;
+}
+
+.MuiMenu-paper {
+  margin-top: 15px !important;
+}
+
+.MuiBox-root {
+  border: 0px !important;
+  border-radius: 5px;
+}
+
+.alaram-box {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  width: 400px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  height: 400px;
+  outline: none;
+  background: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }

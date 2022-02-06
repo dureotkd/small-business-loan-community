@@ -1,16 +1,23 @@
+import qs from "qs";
+import axios from "axios";
 import { connect } from "react-redux";
-import { useCallback, useEffect, useState, useRef } from "react";
 import AuthView from "../../view/auth/AuthView";
+import { useCallback, useEffect, useState, useRef } from "react";
+import { getNaverBtn } from "../../libaray/oauth/oauth";
 
 function Auth({ loginUser }) {
-  const naverLoginRef = useRef();
-
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
+
+  const naverLoginRef = useRef();
 
   const handleNaverLogin = () => {
     naverLoginRef.current.firstChild.click();
   };
+
+  useEffect(() => {
+    getNaverBtn();
+  }, []);
 
   return (
     <AuthView
