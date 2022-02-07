@@ -9,7 +9,7 @@
 body {
   margin: 0;
   padding: 0;
-  background: #fff;
+  background: #f5f5f5;
   font-family: "Noto Sans CJK KR";
 }
 h1,
@@ -148,21 +148,23 @@ table {
 i {
   vertical-align: middle;
 }
+
+span {
+  font-size: 13px;
+}
+
 label {
   display: inline-block;
   max-width: 100%;
   font-weight: normal;
 }
 
-.safe-area-view {
-  width: 1260px;
-  margin: 70px auto;
-  display: flex;
-  justify-content: space-between;
-}
-
 .MuiMenu-paper {
   margin-top: 15px !important;
+}
+
+.css-1elwnq4-MuiPaper-root-MuiAccordion-root {
+  box-shadow: none !important;
 }
 
 .MuiBox-root {
@@ -188,6 +190,15 @@ label {
 
 header {
   width: 100%;
+  background: #2c3333;
+  height: 70px;
+  position: fixed;
+  top: 0px;
+  z-index: 10000;
+}
+
+.header {
+  width: 100%;
   height: 70px;
   position: fixed;
   left: 50%;
@@ -201,16 +212,95 @@ header {
   justify-content: space-between;
 }
 
-@media all and (min-width: 780px) {
+.safe-area-view {
+  width: 100%;
+  margin: 70px auto;
+  display: flex;
+  justify-content: space-between;
 }
 
-/* Tablet & Desktop #1 - 태블릿 PC와 데스크톱 공용 스타일 #1 */
-@media all and (min-width: 481px) {
+aside {
+  flex: 1.5;
+}
+.contents {
+  flex: 6;
+}
+
+.contents-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  background-color: aliceblue;
+  margin-top: 12px;
+  border-bottom: 1px solid rgb(235, 235, 235);
+}
+
+.best-contents {
+  margin-bottom: 20px;
+}
+
+.main-wrap {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  margin-top: 30px;
+  padding: 12px;
+}
+
+.safe-logo {
+  width: 30px;
+  margin-right: 12px;
+}
+
+.list-card {
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+  padding: 16px 20px 12px;
+  margin-bottom: 8px;
+  margin-top: 15px;
+  cursor: pointer;
+}
+
+.body-cut {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  overflow-wrap: break-word;
+  color: rgb(174, 174, 174);
+  font-size: 14px;
+  line-height: 20px;
+  margin-top: 14px;
 }
 
 /* Desktop - 데스크톱 전용 스타일 */
-@media all and (min-width: 1340px) {
-  header {
+@media all and (min-width: 1270px) {
+  .header {
     width: 1260px;
+  }
+  aside {
+    position: sticky;
+    height: 500px;
+    top: 105px;
+  }
+  .main-wrap {
+    display: flex;
+    flex-direction: row;
+    position: sticky;
+  }
+
+  .contents {
+    padding-left: 14px;
+  }
+  .safe-area-view {
+    width: 1260px;
+  }
+
+  .list-card {
+    margin-top: 0px;
+  }
+
+  .contents-header {
+    margin-top: 0px;
   }
 }

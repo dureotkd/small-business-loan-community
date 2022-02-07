@@ -3,13 +3,16 @@ import { connect } from "react-redux";
 import { useLocation } from "react-router-dom";
 import MainView from "../../view/main/mainView";
 
-function Main({ loginUser }) {
+function Main({ loginUser , dispatch }) {
+
+
+
   return <MainView />;
 }
 
 function ChangeToProps(state) {
   return {
-    loginUser: state.loginUser,
+    loginUser: state.loginUserReducer,
   };
 }
 
