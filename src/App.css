@@ -172,6 +172,47 @@ label {
   border-radius: 5px;
 }
 
+.write-box {
+  width: 90%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  height: 680px;
+  outline: none;
+  background: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.quill {
+  width: 100%;
+  height: 430px;
+  margin-bottom: 80px;
+}
+
+.write-title {
+  border: 1px solid silver;
+  outline: none;
+  width: 100%;
+  text-align: left;
+  border-bottom: none !important;
+  padding: 12px 15px;
+}
+
+.write-save-btn {
+  position: absolute;
+  right: 22px;
+  bottom: 22px;
+}
+
+.ql-editor {
+  background: white;
+}
+
 .alaram-box {
   position: absolute;
   top: 50%;

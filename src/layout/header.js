@@ -1,21 +1,28 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { connect } from "react-redux";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { StyledLogo, StyledDiv } from "../assets/layout/layoutCss";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import { BsFillBellFill } from "react-icons/bs";
+import { BsPencilFill, BsFillBellFill } from "react-icons/bs";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { empty } from "../helper/default";
 import { useNavigate } from "react-router-dom";
+//이렇게 라이브러리를 불러와서 사용하면 됩니다
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 function Header({ loginUser, dispatch }) {
   const navigate = useNavigate();
+
+  const [contents, setContents] = useState("");
+
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const [writeModal, setWriteModal] = useState(false);
 
   const openUserMenu = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -35,8 +42,45 @@ function Header({ loginUser, dispatch }) {
     });
   };
 
-  const handleModalOpen = () => setModalOpen(true);
+  const handleModalOpen = () => {
+    setWriteModal(false);
+    setModalOpen(true);
+  };
   const handleModalClose = () => setModalOpen(false);
+
+  const handleWriteModal = (flag) => {
+    if (flag) setModalOpen(false);
+
+    setWriteModal(flag);
+  };
+
+  const handleWriteForm = () => {
+    alert("ㅋㅋ");
+  };
+
+  // quill에서 사용할 모듈을 설정하는 코드 입니다.
+  // 원하는 설정을 사용하면 되는데, 저는 아래와 같이 사용했습니다.
+  // useMemo를 사용하지 않으면, 키를 입력할 때마다, imageHandler 때문에 focus가 계속 풀리게 됩니다.
+  const modules = useMemo(
+    () => ({
+      toolbar: {
+        container: [
+          ["bold", "italic", "underline", "strike", "blockquote"],
+          [{ size: ["small", false, "large", "huge"] }, { color: [] }],
+          [
+            { list: "ordered" },
+            { list: "bullet" },
+            { indent: "-1" },
+            { indent: "+1" },
+            { align: [] },
+          ],
+          ["image", "video"],
+        ],
+        handlers: {},
+      },
+    }),
+    []
+  );
 
   return (
     <header>
@@ -51,6 +95,15 @@ function Header({ loginUser, dispatch }) {
         >
           {!empty(loginUser) ? (
             <div style={{ display: "flex", alignItems: "center" }}>
+              <BsPencilFill
+                style={{
+                  color: "white",
+                  fontSize: 20,
+                  marginRight: 30,
+                  cursor: "pointer",
+                }}
+                onClick={handleWriteModal.bind(this, true)}
+              />
               <BsFillBellFill
                 style={{
                   color: "white",
@@ -78,6 +131,44 @@ function Header({ loginUser, dispatch }) {
                 <MenuItem onClick={goMyInfo}>정보</MenuItem>
                 <MenuItem onClick={handleLogOut}>로그아웃</MenuItem>
               </Menu>
+              <Modal
+                open={writeModal}
+                onClose={handleWriteModal.bind(this, false)}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+              >
+                <Box className="write-box">
+                  <input
+                    type="text"
+                    className="write-title"
+                    placeholder="제목을 입력해주세요"
+                  />
+                  <ReactQuill
+                    value={contents}
+                    onChange={setContents}
+                    modules={modules}
+                    theme="snow"
+                    placeholder="내용을 입력해주세요."
+                  />
+                  <div className="write-save-btn">
+                    <Button
+                      style={{ marginRight: 15 }}
+                      variant="contained"
+                      color="error"
+                      onClick={() => setWriteModal(false)}
+                    >
+                      닫기
+                    </Button>
+                    <Button
+                      variant="contained"
+                      color="success"
+                      onClick={handleWriteForm}
+                    >
+                      작성 완료
+                    </Button>
+                  </div>
+                </Box>
+              </Modal>
               <Modal
                 open={modalOpen}
                 onClose={handleModalClose}
