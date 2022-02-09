@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useRef, useEffect } from "react";
 import { connect } from "react-redux";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -10,17 +10,14 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { empty } from "../helper/default";
 import { useNavigate } from "react-router-dom";
-//이렇게 라이브러리를 불러와서 사용하면 됩니다
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
+import QuillEditor from "../component/quillEditor";
 
 function Header({ loginUser, dispatch }) {
   const navigate = useNavigate();
 
   const [contents, setContents] = useState("");
-
+  const [title, setTitle] = useState("");
   const [anchorEl, setAnchorEl] = useState(null);
-  const [open, setOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [writeModal, setWriteModal] = useState(false);
 
@@ -57,30 +54,6 @@ function Header({ loginUser, dispatch }) {
   const handleWriteForm = () => {
     alert("ㅋㅋ");
   };
-
-  // quill에서 사용할 모듈을 설정하는 코드 입니다.
-  // 원하는 설정을 사용하면 되는데, 저는 아래와 같이 사용했습니다.
-  // useMemo를 사용하지 않으면, 키를 입력할 때마다, imageHandler 때문에 focus가 계속 풀리게 됩니다.
-  const modules = useMemo(
-    () => ({
-      toolbar: {
-        container: [
-          ["bold", "italic", "underline", "strike", "blockquote"],
-          [{ size: ["small", false, "large", "huge"] }, { color: [] }],
-          [
-            { list: "ordered" },
-            { list: "bullet" },
-            { indent: "-1" },
-            { indent: "+1" },
-            { align: [] },
-          ],
-          ["image", "video"],
-        ],
-        handlers: {},
-      },
-    }),
-    []
-  );
 
   return (
     <header>
@@ -142,14 +115,9 @@ function Header({ loginUser, dispatch }) {
                     type="text"
                     className="write-title"
                     placeholder="제목을 입력해주세요"
+                    onChange={(event) => setTitle(event.target.value)}
                   />
-                  <ReactQuill
-                    value={contents}
-                    onChange={setContents}
-                    modules={modules}
-                    theme="snow"
-                    placeholder="내용을 입력해주세요."
-                  />
+                  <QuillEditor setContents={setContents} contents={contents} />
                   <div className="write-save-btn">
                     <Button
                       style={{ marginRight: 15 }}
