@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { connect } from "react-redux";
+import userApi from "../../../api/userApi";
 import { useNavigate } from "react-router-dom";
 import { getNaverUser } from "../../../libaray/oauth/oauth";
 import { StyledSafeDiv } from "../../../assets/default/defaultCss";
@@ -13,6 +14,8 @@ function Callback({ loginUser, dispatch }) {
 
   const getOauth = async () => {
     const naverUser = await getNaverUser();
+    const seq = await userApi.saveOauth(naverUser);
+    naverUser.seq = seq;
 
     dispatch({
       type: "doLogin",

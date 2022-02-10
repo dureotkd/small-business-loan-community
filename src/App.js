@@ -6,7 +6,7 @@ import { ThemeProvider } from "styled-components";
 import { combineReducers, createStore } from "redux";
 import { useState, useEffect, useCallback } from "react";
 
-import { baseServerUrl } from "./helper/port";
+import userApi from "./api/userApi";
 import Header from "./layout/header";
 import Auth from "./controller/auth/auth";
 import Join from "./controller/join/join";
@@ -38,7 +38,6 @@ function App() {
 
       case "doLogin":
         const { user } = param;
-
         localStorage.setItem("user", JSON.stringify(user));
 
         return user;

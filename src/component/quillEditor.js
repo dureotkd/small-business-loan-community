@@ -1,6 +1,6 @@
 //이렇게 라이브러리를 불러와서 사용하면 됩니다
 import axios from "axios";
-import {baseServerUrl} from "../helper/port";
+import { baseServerUrl } from "../helper/port";
 import { useRef, useMemo } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
@@ -9,7 +9,7 @@ export default function QuillEditor(props) {
   const QuillRef = useRef();
 
   // 이미지를 업로드 하기 위한 함수
-  const imageHandler = () => {
+  const imageHandler = async () => {
     // 파일을 업로드 하기 위한 input 태그 생성
     const input = document.createElement("input");
     const formData = new FormData();
@@ -26,11 +26,6 @@ export default function QuillEditor(props) {
       if (file !== null) {
         formData.append("image", file[0]);
 
-        axios.post(`${baseServerUrl}/api/uploadFile`, formData, { 
-          headers: { "Content-Type" : "multipart/form-data" } 
-        }).then(function(res){ });
-
-
         // 저의 경우 파일 이미지를 서버에 저장했기 때문에
         // 백엔드 개발자분과 통신을 통해 이미지를 저장하고 불러왔습니다.
         try {
@@ -45,10 +40,24 @@ export default function QuillEditor(props) {
 
             quill?.setSelection(range, 1);
 
-            quill?.clipboard.dangerouslyPasteHTML(
-              range,
-              `<img src=${url} alt="이미지 태그가 삽입됩니다." />`
-            );
+            await axios
+              .post(`${baseServerUrl}/api/uploadFile`, formData, {
+                headers: { "Content-Type": "multipart/form-data" },
+              })
+              .then(function ({ status, data }) {
+                if (status !== 200) {
+                  alert("알수없는 오류 발생");
+                } else if (status === 400) {
+                  alert(data.errorMessage);
+                } else {
+                  const src = `${process.env.PUBLIC_URL}/${data.filePath}`;
+
+                  quill?.clipboard.dangerouslyPasteHTML(
+                    range,
+                    `<img src=${src} alt="이미지 태그가 삽입됩니다." />`
+                  );
+                }
+              });
           }
         } catch (error) {}
       }

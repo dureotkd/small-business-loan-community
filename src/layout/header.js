@@ -11,6 +11,8 @@ import Modal from "@mui/material/Modal";
 import { empty } from "../helper/default";
 import { useNavigate } from "react-router-dom";
 import QuillEditor from "../component/quillEditor";
+import { baseServerUrl } from "../helper/port";
+import axios from "axios";
 
 function Header({ loginUser, dispatch }) {
   const navigate = useNavigate();
@@ -52,7 +54,27 @@ function Header({ loginUser, dispatch }) {
   };
 
   const handleWriteForm = () => {
-    alert("ㅋㅋ");
+    axios({
+      method: "patch",
+      url: `${baseServerUrl}/api/article`,
+      params: {
+        title,
+        contents,
+        userSeq: loginUser.seq,
+      },
+    })
+      .then(({ data, status }) => {
+        if (status !== 200) {
+          alert("알수없는 오류발생");
+        } else if (status === 401) {
+          alert(data.errorMessage);
+        } else {
+          alert("작성되었습니다 " + data.seq);
+        }
+      })
+      .catch((err) => {
+        console.log("handleWriteForm error" + err);
+      });
   };
 
   return (

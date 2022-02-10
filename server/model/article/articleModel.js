@@ -2,25 +2,13 @@
 
 const Core = require("../Core/index");
 
-class UserModel extends Core {
+class ArticleModel extends Core {
   constructor(props) {
     super(props);
 
-    this.table = "user";
+    this.table = "article";
 
     this.core = new Core();
-  }
-
-  findByOauthId(id) {
-    const sql = `SELECT * FROM loan.user a WHERE a.oauthId = '${id}' LIMIT 1`;
-
-    const row = this.core.excute({
-      database: "loan",
-      sql: sql,
-      type: "row",
-    });
-
-    return row;
   }
 
   save(data) {
@@ -48,6 +36,6 @@ class UserModel extends Core {
   }
 }
 
-const userModel = new UserModel();
+const articleModel = new ArticleModel();
 
-module.exports = userModel;
+module.exports = articleModel;

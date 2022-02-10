@@ -1,3 +1,4 @@
+import userApi from "../../../api/userApi";
 import { useEffect, useCallback } from "react";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -10,6 +11,8 @@ function Callback(props) {
 
   const getOauth = async () => {
     const kakaoUser = await getKaKaoUser(code);
+    const seq = await userApi.saveOauth(kakaoUser);
+    kakaoUser.seq = seq;
 
     props.dispatch({
       type: "doLogin",
