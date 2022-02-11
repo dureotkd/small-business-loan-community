@@ -7,10 +7,12 @@ import { combineReducers, createStore } from "redux";
 import { useState, useEffect, useCallback } from "react";
 
 import userApi from "./api/userApi";
+
 import Header from "./layout/header";
 import Auth from "./controller/auth/auth";
 import Join from "./controller/join/join";
 import Main from "./controller/main/main";
+import Article from "./controller/article/article";
 import KaKaoAuth from "./controller/oauth/kakao/callback";
 import NaverAuth from "./controller/oauth/naver/callback";
 
@@ -61,6 +63,7 @@ function App() {
           <Route exact path="/" element={<Main />} />
           <Route exact path="/join" element={<Join />} />
           <Route exact path="/auth" element={<Auth />} />
+          <Route exact path="/article/:id" element={<Article />} />
           <Route exact path="/oauth/kakao/callback" element={<KaKaoAuth />} />
           <Route exact path="/oauth/naver/callback" element={<NaverAuth />} />
         </Routes>

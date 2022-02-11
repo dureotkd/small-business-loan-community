@@ -11,6 +11,28 @@ class ArticleModel extends Core {
     this.core = new Core();
   }
 
+  getRowByPk(id) {
+    const where = [];
+
+    where.push(`a.userSeq = b.seq`);
+    where.push(`a.seq = ${id}`);
+
+    const sql = `SELECT 
+      a.* , b.nickname, b.profile 
+    FROM 
+      loan.article a , loan.user b 
+    WHERE 
+      %s`.replace("%s", where.join(" AND "));
+
+    const row = this.core.excute({
+      database: "loan",
+      sql: sql,
+      type: "row",
+    });
+
+    return row;
+  }
+
   save(data) {
     const sql = this.core.getInsertQuery({ table: this.table, data });
 

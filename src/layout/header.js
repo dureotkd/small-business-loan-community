@@ -69,7 +69,7 @@ function Header({ loginUser, dispatch }) {
         } else if (status === 401) {
           alert(data.errorMessage);
         } else {
-          alert("작성되었습니다 " + data.seq);
+          window.location.replace(`/article/${data.seq}`);
         }
       })
       .catch((err) => {

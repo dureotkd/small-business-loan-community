@@ -132,6 +132,23 @@ router.patch("/article", async (req, res) => {
   });
 });
 
+router.get("/article", async (req, res) => {
+  const { id } = req.query;
+
+  if (!id) {
+    res.status(401).send({
+      errorMessage: "존재하지 않는 게시글입니다",
+    });
+    return;
+  }
+
+  const article = articleModel.getRowByPk(id);
+
+  res.send({
+    article,
+  });
+});
+
 router.post("/uploadFile", upload.single("image"), (req, res) => {
   const file = req?.file;
 
