@@ -9,7 +9,6 @@ const ip = require("ip");
 const multer = require("multer");
 const moment = require("moment");
 const upload = multer({ dest: "../public/uploadedFile/" }); // 2
-const fileModel = require("../model/file/fileModel");
 const userModel = require("../model/user/userModel");
 const articleModel = require("../model/article/articleModel");
 
@@ -132,6 +131,14 @@ router.patch("/article", async (req, res) => {
   });
 });
 
+router.get("/articles", async (req, res) => {
+  const articles = await articleModel.getAll();
+
+  res.send({
+    articles,
+  });
+});
+
 router.get("/article", async (req, res) => {
   const { id } = req.query;
 
@@ -142,7 +149,7 @@ router.get("/article", async (req, res) => {
     return;
   }
 
-  const article = articleModel.getRowByPk(id);
+  const article = await articleModel.getRowByPk(id);
 
   res.send({
     article,

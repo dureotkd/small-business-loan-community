@@ -159,6 +159,19 @@ label {
   font-weight: normal;
 }
 
+blockquote {
+  border-left: 4px solid #ccc;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  padding-left: 16px;
+  margin: 0px;
+}
+
+.logo {
+  width: 35px;
+  height: 35px;
+}
+
 .MuiMenu-paper {
   margin-top: 15px !important;
 }
@@ -320,6 +333,43 @@ aside {
   justify-content: center;
   width: 100%;
   height: 85vh;
+}
+
+.article-profile {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+
+.title-card {
+  border-bottom: 1px solid black;
+  padding-bottom: 12px;
+}
+
+.contents-card {
+  width: 93%;
+  height: 100%;
+  margin: 25px auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.title-card > h2 {
+  white-space: pre-wrap;
+  word-break: break-all;
+  overflow-wrap: break-all;
+}
+
+.body-card {
+  margin-top: 30px;
+  white-space: pre-wrap;
+  word-break: break-all;
+  overflow-wrap: break-all;
+}
+
+.body-card img {
+  width: 100%;
 }
 
 /* Desktop - 데스크톱 전용 스타일 */

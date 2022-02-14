@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { connect } from "react-redux";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -12,6 +12,7 @@ import { empty } from "../helper/default";
 import { useNavigate } from "react-router-dom";
 import QuillEditor from "../component/quillEditor";
 import { baseServerUrl } from "../helper/port";
+import { FcGoogle } from "react-icons/fc";
 import axios from "axios";
 
 function Header({ loginUser, dispatch }) {
@@ -80,7 +81,9 @@ function Header({ loginUser, dispatch }) {
   return (
     <header>
       <div className="header">
-        <StyledLogo>{loginUser.email}</StyledLogo>
+        <StyledLogo>
+          <FcGoogle className="logo" onClick={() => navigate("/")} />
+        </StyledLogo>
         <StyledDiv
           style={{
             display: "flex",
@@ -137,6 +140,7 @@ function Header({ loginUser, dispatch }) {
                     type="text"
                     className="write-title"
                     placeholder="제목을 입력해주세요"
+                    maxLength={20}
                     onChange={(event) => setTitle(event.target.value)}
                   />
                   <QuillEditor setContents={setContents} contents={contents} />

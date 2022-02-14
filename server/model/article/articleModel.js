@@ -11,6 +11,24 @@ class ArticleModel extends Core {
     this.core = new Core();
   }
 
+  getAll() {
+    const sql = `
+    SELECT 
+      * 
+      , (SELECT nickname FROM loan.user WHERE a.userSeq = seq LIMIT 1) as nickname 
+    FROM 
+      loan.article a 
+    ORDER BY a.regDate DESC`;
+
+    const all = this.core.excute({
+      database: "loan",
+      sql: sql,
+      type: "all",
+    });
+
+    return all;
+  }
+
   getRowByPk(id) {
     const where = [];
 

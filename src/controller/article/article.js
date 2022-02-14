@@ -8,8 +8,9 @@ function Article({ loginUser, dispatch }) {
   const { id } = useParams();
   const [article, setArticle] = useState({});
 
-  const getArticle = useCallback(() => {
-    setArticle(articleApi.getRowByPk(id));
+  const getArticle = useCallback(async () => {
+    const { article } = await articleApi.getRowByPk(id);
+    setArticle(article);
   }, [id]);
 
   useEffect(() => {

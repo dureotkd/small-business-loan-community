@@ -2,32 +2,6 @@ import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import { CgSortAz } from "react-icons/cg";
-
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData("안녕하세요", 159, 6.0, 24, 4.0),
-  createData("잘부탁드립니다 전세대출 문의드려요", 237, 9.0, 37, 4.3),
-  createData("대출 사기당햌ㅆ습니다", 262, 16.0, 24, 6.0),
-  createData("..........전세대출", 305, 3.7, 67, 4.3),
-  createData("중기청", 356, 16.0, 49, 3.9),
-  createData("중기청", 356, 16.0, 49, 3.9),
-  createData("중기청", 356, 16.0, 49, 3.9),
-  createData("중기청", 356, 16.0, 49, 3.9),
-  createData("중기청", 356, 16.0, 49, 3.9),
-  createData("중기청", 356, 16.0, 49, 3.9),
-  createData("중기청", 356, 16.0, 49, 3.9),
-];
 
 export default function MainView(props) {
   return (
@@ -103,16 +77,17 @@ export default function MainView(props) {
               </li>
             </ul>
           </div>
-          {rows &&
-            rows.map((row, index) => {
+          {props.article &&
+            props.article.map((val, index) => {
               return (
-                <div className="list-card">
+                <div
+                  className="list-card"
+                  key={val.seq}
+                  onClick={props.goDetail.bind(this, val.seq)}
+                >
                   <div>
-                    <h4>안녕하세요</h4>
-                    <p className="body-cut">
-                      면접 마치고 면접관분들이 엘베 잡아주시고 탈 때까지
-                      기다려주셨는데... 이런 것도 시그널로 볼 수 있을까요?{" "}
-                    </p>
+                    <h4>{val.title}</h4>
+                    <p className="body-cut">{val.cutBody}</p>
                   </div>
                   <div
                     style={{
@@ -122,13 +97,12 @@ export default function MainView(props) {
                     }}
                   >
                     <div className="">
-                      <span>성민</span>
+                      <span>{val.nickname}</span>
                       <span>2시간전</span>
                     </div>
                     <div>
-                      <span>11</span>
-                      <span>11</span>
-                      <span>13</span>
+                      <span>{val.hit}</span>
+                      <span>{val.like}</span>
                     </div>
                   </div>
                 </div>
