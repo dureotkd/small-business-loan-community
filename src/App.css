@@ -366,10 +366,51 @@ aside {
   white-space: pre-wrap;
   word-break: break-all;
   overflow-wrap: break-all;
+  min-height: 500px;
+  color: rgb(33, 35, 34);
+  line-height: 24px;
+  margin-bottom: 24px;
 }
 
 .body-card img {
   width: 100%;
+}
+
+.reply-card {
+  padding: 12px;
+  box-shadow: rgb(0 0 0 / 8%) 0px 1px 4px;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.reply-write-box > textarea {
+  width: 100%;
+  line-height: 1.8;
+  background-color: white;
+  border-radius: 8px;
+  border: none;
+  min-height: 136px;
+  margin-bottom: 12px;
+  padding: 12px;
+  height: 130px;
+}
+
+.reply-save-btn:disabled {
+  background: #bdbdbd;
+  border: 1px solid#bdbdbd;
+  color: white;
+}
+
+.reply-save-btn {
+  outline: none;
+  border: none;
+  width: 100%;
+  padding: 4px;
+  margin-bottom: 12px;
+  border-radius: 6px;
+  background: #3f50b5;
+  border: 1px solid#3f50b5;
+  color: white;
+  transition: all 0.3s;
 }
 
 /* Desktop - 데스크톱 전용 스타일 */

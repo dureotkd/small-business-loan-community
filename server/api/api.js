@@ -11,6 +11,7 @@ const moment = require("moment");
 const upload = multer({ dest: "../public/uploadedFile/" }); // 2
 const userModel = require("../model/user/userModel");
 const articleModel = require("../model/article/articleModel");
+const replyModel = require("../model/reply/replyModel");
 
 router.get("/", (req, res) => {
   // if (!fs.existsSync("./uploadedFile")) fs.mkdirSync("./uploadedFile"); // 2
@@ -131,12 +132,8 @@ router.patch("/article", async (req, res) => {
   });
 });
 
-router.get("/articles", async (req, res) => {
-  const articles = await articleModel.getAll();
-
-  res.send({
-    articles,
-  });
+router.patch("/reply", async (req, res) => {
+  res.send({});
 });
 
 router.get("/article", async (req, res) => {
@@ -155,6 +152,8 @@ router.get("/article", async (req, res) => {
     article,
   });
 });
+
+router.get("/replies", async (req, res) => {});
 
 router.post("/uploadFile", upload.single("image"), (req, res) => {
   const file = req?.file;

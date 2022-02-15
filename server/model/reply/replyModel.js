@@ -2,10 +2,10 @@
 
 const Core = require("../Core/index");
 
-class ArticleModel extends Core {
+class ReplyModel extends Core {
   constructor(props) {
     super(props);
-    this.table = "article";
+    this.table = "reply";
     this.core = new Core();
   }
 
@@ -74,6 +74,6 @@ class ArticleModel extends Core {
   }
 }
 
-const articleModel = new ArticleModel();
+const replyModel = new ReplyModel();
 
-module.exports = articleModel;
+module.exports = replyModel;
