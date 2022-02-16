@@ -9,14 +9,17 @@ class ReplyModel extends Core {
     this.core = new Core();
   }
 
-  getAll() {
+  getAll(id) {
     const sql = `
     SELECT 
       * 
       , (SELECT nickname FROM loan.user WHERE a.userSeq = seq LIMIT 1) as nickname 
     FROM 
-      loan.article a 
-    ORDER BY a.regDate DESC`;
+      loan.reply a 
+    WHERE 
+      a.articleSeq = '${id}'
+    ORDER BY 
+      a.regDate DESC`;
 
     const all = this.core.excute({
       database: "loan",

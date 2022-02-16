@@ -413,6 +413,10 @@ aside {
   transition: all 0.3s;
 }
 
+.reply-box {
+  width: 100%;
+}
+
 /* Desktop - 데스크톱 전용 스타일 */
 @media all and (min-width: 1270px) {
   .header {

@@ -133,6 +133,26 @@ router.patch("/article", async (req, res) => {
 });
 
 router.patch("/reply", async (req, res) => {
+  const { seq, id, reply } = req.query;
+  const nowIp = ip.address();
+  const nowDate = moment().format("YYYY-MM-DD HH:mm:ss");
+
+  if (!seq || !id) {
+    res.status(401).send({ errorMessage: "invalid parameter" });
+  } else if (!reply) {
+    res.status(401).send({ errorMessage: "empty memo" });
+  }
+
+  replyModel.save({
+    userSeq: seq,
+    articleSeq: id,
+    body: reply,
+    regDate: nowDate,
+    editDate: nowDate,
+    regIp: nowIp,
+    editIp: nowIp,
+  });
+
   res.send({});
 });
 
@@ -153,7 +173,23 @@ router.get("/article", async (req, res) => {
   });
 });
 
-router.get("/replies", async (req, res) => {});
+router.get("/articles", async (req, res) => {
+  const articles = await articleModel.getAll();
+
+  res.send({
+    articles,
+  });
+});
+
+router.get("/replies", async (req, res) => {
+  const { id } = req.query;
+
+  if (!id) res.status(401).send({ errorMessage: "invalid id" });
+
+  const replies = await replyModel.getAll(id);
+
+  res.send({ replies });
+});
 
 router.post("/uploadFile", upload.single("image"), (req, res) => {
   const file = req?.file;

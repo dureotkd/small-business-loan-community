@@ -66,8 +66,6 @@ class Core {
                 break;
 
               case "exec":
-                console.log(data);
-
                 resolve(data?.insertId);
 
                 break;

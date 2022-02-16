@@ -3,6 +3,7 @@ export default function ArticleView({
   handleReply,
   replyDisabled,
   goReply,
+  replies,
 }) {
   if (!article) {
     return (
@@ -51,7 +52,13 @@ export default function ArticleView({
           />
         </div>
         <div className="reply-card">
-          <h4>댓글 67</h4>
+          <h4>댓글 {replies.length}</h4>
+          <div className="reply-box">
+            {replies &&
+              replies.map((reply, index) => {
+                return <div className="reply">{reply.body}</div>;
+              })}
+          </div>
         </div>
       </div>
     </main>
